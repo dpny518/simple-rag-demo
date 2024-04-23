@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  api_server:
+    image: vllm/vllm-openai:latest
+    command: --model /tmp/local_model --port 8001
+    volumes:
+      - ./model:/tmp/local_model
+    ports:
+      - "8001:8001"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - vllm-network
+
+  gradio:
+    build:
+      context: .
+      dockerfile: DockerfileGradio
+    ports:
+      - "8002:8002"
+    depends_on:
+      - api_server
+    networks:
+      - vllm-network
+
+  rag:
+    build:
+      context: ./RAG
+      dockerfile: DockerfileRag
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./RAG/data:/data
+    depends_on:
+      - ollama
+    networks:
+      - vllm-network
+
+  ollama:
+    image: ollama/ollama
+    volumes:
+      - ollama:/root/.ollama
+    ports:
+      - "11434:11434"
+    pull_policy: always
+    tty: true
+    restart: unless-stopped
+
+networks:
+  vllm-network:
+
+volumes:
+  ollama:

@@ -1,0 +1,7 @@
+llama-index==0.8.59
+openai==0.28.1
+pypdf==3.17.2
+transformers
+langchain-community
+torch
+flask

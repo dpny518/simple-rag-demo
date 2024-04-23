@@ -1,0 +1,17 @@
+FROM python:3.11.0-slim
+
+WORKDIR /usr/src/app
+
+RUN mkdir /data
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application files
+COPY . .
+
+# Expose port 8003 for Flask app
+EXPOSE 8003
+
+# Command to run your application
+CMD [ "python", "serve.py" ]

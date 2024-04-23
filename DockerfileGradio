@@ -1,0 +1,17 @@
+# Define an image to start from. 
+FROM python:3.9-slim
+
+# Install the dependencies for the gradio app
+RUN pip install openai gradio gradio_client pydantic async-timeout httpx loguru python-dotenv
+
+# Create a directory for your application within the container
+WORKDIR /workspace
+
+# Copy the app file from your local directory to the container's workspace directory
+COPY inference/gradio_openai_chatbot_webserver.py /workspace/app.py
+
+# Expose port 8002. You CAN do this from the command line, but it makes it possible to run entirely in the app
+EXPOSE 8002
+
+# Run the app. Will be accessible at http://localhost:8002/
+CMD ["python3", "app.py", "--model-url", "http://api_server:8001/v1", "-m", "/tmp/local_model", "--host", "0.0.0.0", "--port", "8002"]
