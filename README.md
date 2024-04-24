@@ -4,9 +4,9 @@ This repository features a Docker Compose setup designed to demonstrate a langua
 
 "Currently, LlamaIndex does not allow the use of custom models with their OpenAI class because it requires specific metadata from the model name." - See more: https://docs.llamaindex.ai/en/stable/api_reference/llms/openai_like/
 
-For scenarios leveraging an open-source model without fine-tuning, the process could be simplified: vLLM could then be used for both LlamaIndex retrieval and LLM response generation.
+For scenarios leveraging an openai supported models without fine-tuning, the process could be simplified: vLLM could then be used for both LlamaIndex retrieval and LLM response generation.
 
-If the OpenAI-compatible features from the vLLM server are not required, an alternative approach could involve using a non-OpenAI vLLM server for both LlamaIndex and LLM querying. Alternatively, we could entirely omit vLLM and utilize Ollama for LlamaIndex, RAG, and LLM query functionalities, but this would require importing the model into Ollama:
+Alternatively, we could entirely omit vLLM and utilize Ollama for LlamaIndex, RAG, and LLM query functionalities, but this would require importing the model into Ollama:
 ```
 https://github.com/ollama/ollama/blob/main/docs/modelfile.md
 ```
