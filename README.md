@@ -1,12 +1,17 @@
 # LLM with RAG Demonstration
 
-This repository features a Docker Compose setup designed to demonstrate a simple language learning model (LLM) augmented with Retrieval-Augmented Generation (RAG). It utilizes various components including vLLM, Ollama, and Gradio for the user interface. This setup specifically assumes the use of a fine-tuned model located in the ./model folder. We are using the open ai server from vllm, so we can not use custom models for llama index, thus we are using ollama for the llamaindex. If we don't want the open ai compatabile features from vllm server we could use the non open ai server and just use vllm for both llama index and querying the llm. Or We could do this without vllm and just use ollama for llamaindex and rag as well as the llm for query but then we would need to import the model into ollama 
-https://github.com/ollama/ollama/blob/main/docs/modelfile.md
-```If 
-Currently, llama_index prevents using custom models with their OpenAI class because they need to be able to infer some metadata from the model name.
-https://docs.llamaindex.ai/en/stable/api_reference/llms/openai_like/
+This repository features a Docker Compose setup designed to demonstrate a language learning model (LLM) augmented with Retrieval-Augmented Generation (RAG). It utilizes components including vLLM, Ollama, and Gradio for the user interface. This setup specifically uses a fine-tuned model located in the ./model folder. We are leveraging the OpenAI server from vLLM, which currently does not support custom models for LlamaIndex, necessitating the use of Ollama for the LlamaIndex functionality.
+
+"Currently, LlamaIndex does not allow the use of custom models with their OpenAI class because it requires specific metadata from the model name." - See more: https://docs.llamaindex.ai/en/stable/api_reference/llms/openai_like/
+
+For scenarios leveraging an open-source model without fine-tuning, the process could be simplified: vLLM could then be used for both LlamaIndex retrieval and LLM response generation.
+
+If the OpenAI-compatible features from the vLLM server are not required, an alternative approach could involve using a non-OpenAI vLLM server for both LlamaIndex and LLM querying. Alternatively, we could entirely omit vLLM and utilize Ollama for LlamaIndex, RAG, and LLM query functionalities, but this would require importing the model into Ollama:
+```Learn how to import models into Ollama: https://github.com/ollama/ollama/blob/main/docs/modelfile.md
 ```
-leveraging an open-source model without fine-tuning, the process could be simplified: vLLM could then be used for both LlamaIndex retrieval and LLM response generation.
+
+
+
 
 ## Components
 
