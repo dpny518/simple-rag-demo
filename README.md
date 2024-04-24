@@ -1,6 +1,12 @@
 # LLM with RAG Demonstration
 
-This repository features a Docker Compose setup designed to demonstrate a simple language learning model (LLM) augmented with Retrieval-Augmented Generation (RAG). It utilizes various components including vLLM, Ollama, and Gradio for the user interface. This setup specifically assumes the use of a fine-tuned model located in the ./model folder. If leveraging an open-source model without fine-tuning, the process could be simplified: vLLM could then be used for both LlamaIndex retrieval and LLM response generation.
+This repository features a Docker Compose setup designed to demonstrate a simple language learning model (LLM) augmented with Retrieval-Augmented Generation (RAG). It utilizes various components including vLLM, Ollama, and Gradio for the user interface. This setup specifically assumes the use of a fine-tuned model located in the ./model folder. We are using the open ai server from vllm, so we can not use custom models for llama index, thus we are using ollama for the llamaindex. If we don't want the open ai compatabile features from vllm server we could use the non open ai server and just use vllm for both llama index and querying the llm. Or We could do this without vllm and just use ollama for llamaindex and rag as well as the llm for query but then we would need to import the model into ollama 
+https://github.com/ollama/ollama/blob/main/docs/modelfile.md
+```If 
+Currently, llama_index prevents using custom models with their OpenAI class because they need to be able to infer some metadata from the model name.
+https://docs.llamaindex.ai/en/stable/api_reference/llms/openai_like/
+```
+leveraging an open-source model without fine-tuning, the process could be simplified: vLLM could then be used for both LlamaIndex retrieval and LLM response generation.
 
 ## Components
 
@@ -42,8 +48,6 @@ To start the demonstration, ensure Docker is installed and run the following com
 ```bash
 docker-compose up
 ```
-## Ollama only
-We could do this without vllm and just use ollama for llamaindex and rag as well as the llm for query but then we would need to import the model into ollama 
-https://github.com/ollama/ollama/blob/main/docs/modelfile.md
+
 
 
