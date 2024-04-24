@@ -49,11 +49,21 @@ All services are connected via a custom network named `vllm-network` to ensure t
 ## Volumes
 A dedicated volume named `ollama` is used to store Ollama's data persistently.
 
+
 ## Usage
-To start the demonstration, ensure Docker is installed and run the following command from the root of this repository:
-```bash
+To run this demonstration, please ensure Docker is installed on your machine. Follow these steps from the root directory of this repository:
+
+Build the Docker image:
+```
+docker-compose build
+```
+Start the Docker container:
+After the build completes, start the container with:
+```
 docker-compose up
 ```
+Access the application:
+Open a web browser and navigate to http://localhost:8002 to view the application.
 
 
 
